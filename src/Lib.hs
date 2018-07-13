@@ -15,10 +15,10 @@ someFunc :: IO ()
 someFunc = putStrLn "someFunc"
 
 parsePage :: MonadThrow m => Consumer Event m (Maybe Page)
-parsePage = Page $ tag' "page" $ tag' "title"
+parsePage = Page (tag' "page") (tag' "title")
 
 parsePages :: MonadThrow m => Sink Event m (Maybe [Page])
-parsePages = tagNoAttr "mediawiki" $ many parsePage
+parsePages = tag "mediawiki" $ many parsePage
 
 readFile :: String -> IO ()
 readFile path = do
